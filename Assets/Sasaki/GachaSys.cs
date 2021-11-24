@@ -18,7 +18,6 @@ public class GachaSys : MonoBehaviour
     [SerializeField] public int MoneyInPockets;
     /// <summary>所持金を表示する UI のテキスト</summary>
     [SerializeField] Text _moneyText;
-    public int GachaPulledCounter = 0;
     public static bool GameOver = false;
 
     [SerializeField] GameObject m_jibun = default;
@@ -29,6 +28,13 @@ public class GachaSys : MonoBehaviour
     [SerializeField] int m_kakaku1 = 10;
     [SerializeField] int m_kakaku2 = 1;
 
+    [SerializeField] GameObject m_TheWin = default;
+    [SerializeField] GameObject m_TheLose = default;
+
+    [SerializeField] int tekiPower = 250;
+
+    [SerializeField] GameObject[] m_enemyArray = new GameObject[3];
+
     public enum Turn
     {
         InputTurn,
@@ -37,13 +43,26 @@ public class GachaSys : MonoBehaviour
     }
     public static Turn m_turn = Turn.InputTurn;
 
+    private void Awake()
+    {
+        foreach(var x in m_enemyArray)
+        {
+            x.SetActive(false);
+        }
+    }
+
     void Start()
     {
+        m_enemyArray[GameStart.enemyID].SetActive(true);
+
         m_turn = Turn.InputTurn;
 
         m_ensyutu.SetActive(false);
-        _moneyText.text = "MONEY: " + MoneyInPockets.ToString();
+        _moneyText.text = "銭: " + MoneyInPockets.ToString();
         m_ResultDsp.SetActive(false);
+        m_TheWin.SetActive(false);
+        m_TheLose.SetActive(false);
+        MoneyInPockets = 100;
     }
 
     public void Gacha0()
@@ -111,7 +130,7 @@ public class GachaSys : MonoBehaviour
                 x.transform.localPosition = new Vector3(0, 0, 0);
 
             }
-            else if (rondom < 91)
+            else if (rondom < 61)
             {
                 int c = Random.Range(0, m_CanHitCharactors_C.Count);
                 var x = Instantiate(m_CanHitCharactors_C[c]);
@@ -186,23 +205,23 @@ public class GachaSys : MonoBehaviour
             m_turn = Turn.BattleTurn;
         }
 
-        if(m_turn == Turn.GameSetTurn)
+        if(m_turn == Turn.BattleTurn)
         {
-            /*
-             if(tekiPower < jibunPower)
+            
+             if(tekiPower < Player._power)
              {
-                win.
+                m_TheWin.SetActive(true);
              }
-             else if(tekiPower == jibunPower)
+             else if(tekiPower == Player._power)
              {
-                hikiwake.
-             }
+                m_TheWin.SetActive(true);
+                m_TheLose.SetActive(true);
+            }
              else
              {
-                make.
-                GameOver = true;
+                m_TheLose.SetActive(true);
              }
-             */
+             
         }
     }
 
@@ -210,9 +229,9 @@ public class GachaSys : MonoBehaviour
     {
 
         MoneyInPockets -= money;
-        Debug.LogFormat("Money: {0}", MoneyInPockets);
+        Debug.LogFormat("銭: {0}", MoneyInPockets);
 
-        _moneyText.text = "MONEY: " + MoneyInPockets.ToString();
+        _moneyText.text = "銭: " + MoneyInPockets.ToString();
 
         m_ensyutu.SetActive(true);
 

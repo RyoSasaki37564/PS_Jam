@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public static int _power = 0;
-    [SerializeField] public static int _money = 0;
+    //[SerializeField] public static int _money = 0;
     [SerializeField] Text _playerpower = default;
 
     private void Update()
