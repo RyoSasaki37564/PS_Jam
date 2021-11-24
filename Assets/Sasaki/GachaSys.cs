@@ -30,6 +30,7 @@ public class GachaSys : MonoBehaviour
 
     [SerializeField] GameObject m_TheWin = default;
     [SerializeField] GameObject m_TheLose = default;
+    [SerializeField] GameObject m_TheDraw = default;
 
     [SerializeField] int tekiPower = 250;
 
@@ -214,8 +215,9 @@ public class GachaSys : MonoBehaviour
              }
              else if(tekiPower == Player._power)
              {
-                m_TheWin.SetActive(true);
-                m_TheLose.SetActive(true);
+                //m_TheWin.SetActive(true);
+                //m_TheLose.SetActive(true);
+                m_TheDraw.SetActive(true);
             }
              else
              {
