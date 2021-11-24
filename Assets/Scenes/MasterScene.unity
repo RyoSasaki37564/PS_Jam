@@ -216,6 +216,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basics
       objectReference: {fileID: 0}
+    - target: {fileID: 2569184046544529313, guid: d6f88bec4d3f0f94b96137b6997c1841,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u3059\u30FC\u3071\u30FC\u308C\u3042"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569184047208267970, guid: d6f88bec4d3f0f94b96137b6997c1841,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569184047598368649, guid: d6f88bec4d3f0f94b96137b6997c1841,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7991631159715861943, guid: d6f88bec4d3f0f94b96137b6997c1841,
         type: 3}
       propertyPath: m_RootOrder
