@@ -16,7 +16,7 @@ public class GameStart : MonoBehaviour
 
     public void Hajimari()
     {
-        enemyID = Random.Range(0, 2);
+        enemyID = Random.Range(0, 3);
         m_battle.SetActive(true);
         m_jibun.SetActive(false);
     }
