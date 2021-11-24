@@ -13,16 +13,30 @@ public class GachaSys : MonoBehaviour
     [SerializeField] List<GameObject> m_CanHitCharactors_R = new List<GameObject>(); //排出Rキャラリスト
 
 
-    public static int m_money = 10;
+    [SerializeField] public int MoneyInPockets;
+    /// <summary>所持金を表示する UI のテキスト</summary>
+    [SerializeField] Text _moneyText;
+    public int GachaPulledCounter = 0;
+    public static bool GameOver = false;
+
+    [SerializeField] GameObject m_jibun = default;
+
+    [SerializeField] GameObject m_ensyutu = default;
+
+    [SerializeField]int m_kakaku = 5;
 
     void Start()
     {
+        m_ensyutu.SetActive(false);
+        _moneyText.text = "MONEY: " + MoneyInPockets.ToString();
         m_ResultDsp.SetActive(false);
     }
 
     public virtual void Gacha()
     {
-        if (m_money >= 3)
+        m_ensyutu.SetActive(true);
+        UseMoney(m_kakaku);
+        if (MoneyInPockets >= m_kakaku)
         {
             m_ResultDsp.SetActive(true);
 
@@ -60,6 +74,26 @@ public class GachaSys : MonoBehaviour
 
             }
         }
+        m_jibun.SetActive(false);
+    }
+    void Update()
+    {
+        if (MoneyInPockets <= 0)
+        {
+            GameOver = true;
+        }
     }
 
+    public void UseMoney(int money)
+    {
+
+        MoneyInPockets -= money;
+        Debug.LogFormat("Money: {0}", MoneyInPockets);
+
+        _moneyText.text = "MONEY: " + MoneyInPockets.ToString();
+
+        m_ensyutu.SetActive(true);
+
+        m_jibun.SetActive(false);
+    }
 }
