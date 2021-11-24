@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int _moneyInPockets;
+    [SerializeField] public int MoneyInPockets;
     /// <summary>所持金を表示する UI のテキスト</summary>
     GameObject _moneyText;
     public int GachaPulledCounter = 0;
+    public static bool GameOver  =false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,14 +17,18 @@ public class GameManager : MonoBehaviour
     }
     public void UseMoney(int money)
     {
-        _moneyInPockets -= money;
-        Debug.LogFormat("Money: {0}", _moneyInPockets);
+        MoneyInPockets -= money;
+        Debug.LogFormat("Money: {0}", MoneyInPockets);
 
         // 所持金を画面に表示する
         Text scoreText = _moneyText.GetComponent<Text>();
-        scoreText.text = "MONEY: " + _moneyInPockets.ToString();
+        scoreText.text = "MONEY: " + MoneyInPockets.ToString();
     }
     void Update()
     {
+        if(MoneyInPockets<=0)
+        {
+            GameOver = true;
+        }
     }
 }
